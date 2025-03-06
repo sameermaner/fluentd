@@ -1,0 +1,11 @@
+kubectl create -f 1-elastic.yml
+kubectl create -f 2-kibana.yml
+kubectl create -f 3-fluentd-configmap.yml
+kubectl create -f 4-fluentd-daemonset.yal
+
+
+kubectl get pods -A -w
+kindly wait for 2-5 minutes after each yml file execution.
+
+Create index pattern kubernetes-logs*
+
