@@ -8,9 +8,15 @@ data:
     <source>
       @type tail
       path /var/log/containers/*.log
-      pos_file /var/log/fluentd-containers.pos
+      pos_file /var/log/fluentd-containers.log.pos
       tag kubernetes.*
       format json
+      read_from_head true
+      <parse>
+        @type json
+        time_key time
+        time_format %Y-%m-%dT%H:%M:%S.%NZ
+      </parse>
     </source>
 
     <filter kubernetes.**>
@@ -26,7 +32,10 @@ data:
       port 9200
       scheme http
       logstash_format true
-      logstash_prefix kubernetes-logs
+      logstash_prefix fluentd
+      <buffer>
+      flush_intervals 10s
+      </buffer>
       include_tag_key true
       type_name _doc
     </match>

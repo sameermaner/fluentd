@@ -7,5 +7,5 @@ kubectl create -f 4-fluentd-daemonset.yal
 kubectl get pods -A -w
 kindly wait for 2-5 minutes after each yml file execution.
 
-Create index pattern kubernetes-logs*
+Create index pattern fluentd*
 
